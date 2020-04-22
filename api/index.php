@@ -1,0 +1,225 @@
+<?php
+require_once 'functions.php';
+
+$token = "04ccf460dd35d6d16e08264f9f637fb2"; //[TODO] implement real auth
+
+if (GET('token') == $token) {
+
+   $cities = '[
+    {
+      "name":"Shqiperi",
+      "latlng":[
+         41.352072,
+         20.146179
+      ],
+      "raste_gjithesej": 609,
+      "raste_gjithesej_dje": 584,
+      "te_sheruar": 345,
+      "te_sheruar_dje": 327,
+      "te_vdekur": 26,
+      "te_vdekur_dje": 26,
+      "teste_gjithesej": 6017,
+      "teste_gjithesej_dje": 5775,
+      "lastUpdate": "2020-04-21"
+    },
+    {
+       "name":"Kosove",
+       "raste_gjithesej":598,
+       "raste_gjithesej_dje":510,
+       "te_sheruar":123,
+       "te_sheruar_dje":93,
+       "te_vdekur":15,
+       "te_vdekur_dje":12,
+       "latlng":[
+          42.625876,
+          20.945435
+       ],
+       "lastUpdate": "2020-04-21"
+    },
+    {
+       "name":"Tirane",
+       "cases":253,
+       "casesYesterday":253,
+       "latlng":[
+          41.323201,
+          19.823456
+       ]
+    },
+    {
+       "name":"Durres",
+       "cases":42,
+       "casesYesterday":42,
+       "latlng":[
+          41.322685,
+          19.465714
+       ]
+    },
+    {
+       "name":"Lushnje",
+       "cases":6,
+       "casesYesterday":6,
+       "latlng":[
+          40.936859,
+          19.709473
+       ]
+    },
+    {
+       "name":"Elbasan",
+       "cases":16,
+       "casesYesterday":16,
+       "latlng":[
+          41.105226,
+          20.081635
+       ]
+    },
+    {
+       "name":"Fier",
+       "cases":36,
+       "casesYesterday":36,
+       "latlng":[
+          40.726939,
+          19.557992
+       ]
+    },
+    {
+       "name":"Kavaje",
+       "cases":9,
+       "casesYesterday":9,
+       "latlng":[
+          41.183047,
+          19.562874
+       ]
+    },
+    {
+       "name":"Rrogozhine",
+       "cases":4,
+       "casesYesterday":4,
+       "latlng":[
+          41.076843,
+          19.66615
+       ]
+    },
+    {
+       "name":"Korce",
+       "cases":19,
+       "casesYesterday":19,
+       "latlng":[
+          40.614706,
+          20.778258
+       ]
+    },
+    {
+       "name":"Vlore",
+       "cases":5,
+       "casesYesterday":5,
+       "latlng":[
+          40.467461,
+          19.489402
+       ]
+    },
+    {
+      "name":"Shkoder",
+      "cases":99,
+      "casesYesterday":99,
+      "latlng":[
+         42.05745,
+         19.530945
+      ]
+   },
+    {
+       "name":"Lezhe",
+       "cases":14,
+       "casesYesterday":14,
+       "latlng":[
+          41.786717,
+          19.6458
+       ]
+    },
+    {
+       "name":"Berat",
+       "cases":2,
+       "casesYesterday":2,
+       "latlng":[
+          40.70686,
+          19.943633
+       ]
+    },
+    {
+       "name":"Has",
+       "cases":13,
+       "casesYesterday":13,
+       "latlng":[
+          42.199048,
+          20.406874
+       ]
+    },
+    {
+       "name":"Kruje",
+       "cases":40,
+       "casesYesterday":23,
+       "latlng":[
+          41.506929,
+          19.78174
+       ]
+    },
+    {
+       "name":"Tropoje",
+       "cases":4,
+       "casesYesterday":4,
+       "latlng":[
+          42.401633,
+          20.166521
+       ]
+    },
+    {
+       "name":"Puke",
+       "cases":5,
+       "casesYesterday":5,
+       "latlng":[
+          42.046377,
+          19.897933
+       ]
+    },
+    {
+       "name":"Mirdite",
+       "cases":3,
+       "casesYesterday":3,
+       "latlng":[
+          41.814449,
+          19.953412
+       ]
+    },
+    {
+       "name":"Kukes",
+       "cases":11,
+       "casesYesterday":11,
+       "latlng":[
+          42.078956,
+          20.420258
+       ]
+    },
+    {
+       "name":"Mallakastër",
+       "cases":1,
+       "casesYesterday":1,
+       "latlng":[
+          40.544526,
+          19.804130
+       ]
+    },
+    {
+       "name":"Kurbin",
+       "cases":27,
+       "casesYesterday":19,
+       "latlng":[
+         41.636386,
+         19.713721
+       ]
+    }
+ ]';
+
+
+   die($cities);
+}
+
+http_response_code(401);

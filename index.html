@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>TechAlb COVID-19 (Shqiperi Kosove)</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="https://techalb.al/wp-content/uploads/2018/02/techalb-blu-32x32.png" />
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="TechAlb.al - Informohuni rreth COVID-19">
+	<meta property="og:url" content="https://www.techalb.al/covid">
+	<meta property="og:image"
+		content="https://www.techalb.al/covid/images/COVID-19 CoronaVirus project image.png">
+	<meta property="og:description"
+		content="Ndiqni raste të konfirmuara të COVID-19 në Shqipëri dhe Kosovë nga TechAlb">
+	<link rel="canonical" href="https://techalb.al/covid" />
+
+	<link rel="manifest" href="manifest.json" />
+	<!-- ios support -->
+	<link rel="apple-touch-icon" href="images/icons/icon-72x72.png" />
+	<link rel="apple-touch-icon" href="images/icons/icon-96x96.png" />
+	<link rel="apple-touch-icon" href="images/icons/icon-128x128.png" />
+	<link rel="apple-touch-icon" href="images/icons/icon-144x144.png" />
+	<link rel="apple-touch-icon" href="images/icons/icon-152x152.png" />
+	<link rel="apple-touch-icon" href="images/icons/icon-192x192.png" />
+	<link rel="apple-touch-icon" href="images/icons/icon-384x384.png" />
+	<link rel="apple-touch-icon" href="images/icons/icon-512x512.png" />
+	<meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
+	<meta name="theme-color" content="#ffffff" />
+
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+	<!-- Leaflet Map CSS & JS -->
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+	<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+	<!--<script src="Leaflet.CountrySelect.js"></script>-->
+	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise"></script>
+
+	<!-- Chart.js CDN -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+	<!-- jQuery CDN -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+	<script src="js/ALB.geo.json.js"></script>
+	<script src="js/site.js"></script>
+	<link rel="stylesheet" href="css/site.css" />
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163277650-1"></script>
+
+	<script>
+		window.dataLayer = window.dataLayer || [];
+
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-163277650-1');
+	</script>
+
+</head>
+
+
+<body onload="init()">
+	<div id="map"></div>
+
+	<!-- Modal Structure -->
+	<div id="modal1" class="modal bottom-sheet">
+		<div class="modal-content">
+			<h5 class="center-align">Informacione te detajuara</h5>
+			<div class="divider"></div>
+			<h5>Shqipëri:</h5>
+			<div class="row center-align">
+				<div class="col s6 m3 l2 offset-l1">
+					<div class="card blue-grey darken-1 z-depth-4">
+						<div class="card-content white-text" id="totalCard">
+							<span class="card-title">Raste Totale</span>
+						</div>
+					</div>
+				</div>
+				<div class="col s6 m3 l2">
+					<div class="card blue-grey darken-1 z-depth-4">
+						<div class="card-content white-text" id="activeCard">
+							<span class="card-title">Raste Aktive</span>
+						</div>
+					</div>
+				</div>
+				<div class="col s6 m3 l2">
+					<div class="card green darken-1 z-depth-4">
+						<div class="card-content white-text" id="recoveredCard">
+							<span class="card-title">Sheruar</span>
+						</div>
+					</div>
+				</div>
+				<div class="col s6 m3 l2">
+					<div class="card red darken-1 z-depth-4">
+						<div class="card-content white-text" id="fatalCard">
+							<span class="card-title">Fatale</span>
+						</div>
+					</div>
+				</div>
+				<div class="col s12 m3 l2">
+					<div class="card blue-grey darken-1 z-depth-4">
+						<div class="card-content white-text" id="testedCard">
+							<span class="card-title">Teste</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="divider"></div>
+			<h5>Kosove:</h5>
+			<div class="row center-align">
+				<div class="col s6 m3 l2 offset-l1">
+					<div class="card blue-grey darken-1 z-depth-4">
+						<div class="card-content white-text" id="totalCardKs">
+							<span class="card-title">Raste Totale</span>
+						</div>
+					</div>
+				</div>
+				<div class="col s6 m3 l2">
+					<div class="card blue-grey darken-1 z-depth-4">
+						<div class="card-content white-text" id="activeCardKs">
+							<span class="card-title">Raste Aktive</span>
+						</div>
+					</div>
+				</div>
+				<div class="col s6 m3 l2">
+					<div class="card green darken-1 z-depth-4">
+						<div class="card-content white-text" id="recoveredCardKs">
+							<span class="card-title">Sheruar</span>
+						</div>
+					</div>
+				</div>
+				<div class="col s6 m3 l2">
+					<div class="card red darken-1 z-depth-4">
+						<div class="card-content white-text" id="fatalCardKs">
+							<span class="card-title">Fatale</span>
+						</div>
+					</div>
+				</div>
+				<div class="col s12 m3 l2">
+					<div class="card blue-grey darken-1 z-depth-4">
+						<div class="card-content white-text" id="testedCardKs">
+							<span class="card-title">Teste</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="divider"></div>
+			<h5 class="center-align">Shqipëri</h5>
+			<div class="row">
+				<div class="col s12 m6">
+					<div style="width: 100%;">
+						<canvas id="shkurtChart" height="200px"></canvas>
+					</div>
+				</div>
+				<div class="col s12 m6">
+					<div style="width: 100%;">
+						<canvas id="marsChart" height="200px"></canvas>
+					</div>
+				</div>
+			</div>
+			<br>
+			<h5 style="text-align: center;">Ne zhvillim...</h5>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="modal-close waves-effect waves-green btn-flat">Mbyll</a>
+		</div>
+	</div>
+
+	<!-- Modal Structure -->
+	<div id="modalAbout" class="modal">
+		<div class="modal-content">
+			<h5>Informacione rreth ketij projekti!</h5>
+			<p>Per fat te keq, e gjithe bota ndodhet ne nje situate te veshtire per shkak te virusit te fundit,
+				quajtur
+				CoronaVirus ose COVID-19.</p>
+			<p>Ky eshte nje projekt krijuar nga <a href="https://github.com/eneza" target="_blank"> Edison Neza</a> ne
+				bashkepunim me <a href="https://techalb.al" target="_blank"> TechAlb.al</a> per te ofruar informacione
+				ne kohe reale per
+				gjithe
+				perdoruesit e tij.
+				Te dhenat jane marre nga Ministrite e Shendetesise se dy shteteve tona, prandaj te jeni te
+				sigurte ne
+				vertetesine e tyre.</p>
+
+			<p>Duke uruar qe kjo situate te kaloj sa me shpejt, ju urojme te gjitheve te keni shendet!
+			</p>
+			<p><b>
+					<a href="https://www.instagram.com/explore/tags/rrineshtepi/" target="_blank">#RriNeShtepi</a>
+					<a href="https://www.instagram.com/explore/tags/bashkëdojadalim/" target="_blank">#BashkeDoJaDalim
+					</a>
+				</b> <i style="float: right;">&copy Edison Neza</i></p>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="modal-close waves-effect waves-green btn-flat">Faleminderit</a>
+		</div>
+	</div>
+
+
+	<div class="fixed-action-btn">
+		<a class="btn-floating btn-large red">
+			<i class="large material-icons">mode_edit</i>
+		</a>
+		<ul>
+			<li>
+				<a class="btn-floating blue modal-trigger" href="#modalAbout"><i class="material-icons">info</i></a>
+			</li>
+			<li><a class="btn-floating red" onclick="location.reload();"><i class="material-icons">cached</i></a></li>
+			<li><a class="btn-floating yellow darken-1 modal-trigger" href="#modal1"><i
+						class="material-icons">insert_chart</i></a>
+				<!-- mobile-fab-tip -> used to add a tooltip at the left the btn-floating element -->
+				<!-- <span class="btn-floating mobile-fab-tip">Grafike</span>  -->
+			</li>
+		</ul>
+	</div>
+
+</body>
+
+<script>
+
+	function init() {
+		var baseLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="https://github.com/eneza" target="_blank">Edison Neza</a>'
+		}); // (Tiles by &copy; CartoDB)
+		var map = L.map("map", {
+			layers: [baseLayer],
+			center: [41.5497, 20.467529],
+			zoom: 8
+		});
+
+		if ("fetch" in window) {
+			fetch('api?token=04ccf460dd35d6d16e08264f9f637fb2').then((response) => {
+				return response.json()
+			}).then((cities) => {
+				//console.log(data);
+				cities.forEach(function (city) {
+					L.circle(city.latlng, GetCicleSize(city), {
+						color: 'red',
+						fillColor: '#f03',
+						fillOpacity: 0.5,
+						className: city.name == "Shqiperi" ? 'AlbCircle' : city.name == 'Kosove' ? 'KosCircle' : 'AllCircle'
+					}).addTo(map).bindPopup(HtmlTemplate(city));
+
+					if (city.name == "Shqiperi")
+						GenerateAlbCards(city);
+
+					else if (city.name == "Kosove")
+						GenerateKsCards(city);
+				});
+
+				$('.AlbCircle').hide();
+			})
+		} else
+			alert("Nevojitet nje browser i ri per te aksesuar kete faqe!");
+
+
+		map.on("zoomend", function () {
+			zoomLev = map.getZoom();
+			if (zoomLev > 7) {
+				$('.AlbCircle').hide();
+				$('.AllCircle').show();
+			} else {
+				$('.AlbCircle').show();
+				$('.AllCircle').hide();
+			}
+		});
+
+		InitMaterialize();
+
+		GenerateGraphics();
+	}
+
+
+	if ("serviceWorker" in navigator) {
+		window.addEventListener("load", function () {
+			navigator.serviceWorker
+				.register("/covid/serviceWorker.js")
+				.then(res => console.log("service worker registered"))
+				.catch(err => console.log("service worker not registered", err));
+		});
+	}
+
+	console.log("%cI ❤︎ open source!", "background-color:white;padding:8px 16px;border-radius:8px;font-size:32px;color:red;");
+</script>
+
+</html>
