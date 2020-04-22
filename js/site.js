@@ -1,7 +1,16 @@
+/**
+ * Check if a variable is null or undefined
+ * @param {any} val
+ */
 function IsDefined(val) {
   return typeof val != "undefined" || val != null;
 }
 
+/**
+ * Change the display property (if jQuery isn't included)
+ * @param {string} className
+ * @param {string} display
+ */
 function DisplayHideCirclesByClassName(className, display) {
   var allCircles = document.querySelectorAll("." + className);
   for (i = 0; i < allCircles.length; i++) {
@@ -9,6 +18,10 @@ function DisplayHideCirclesByClassName(className, display) {
   }
 }
 
+/**
+ * Format to datetime DD/MM/YYYY HH:mm
+ * @param {string} date
+ */
 function FormatDateTime(date) {
   var d = new Date(date),
     month = "" + (d.getMonth() + 1),
@@ -25,6 +38,10 @@ function FormatDateTime(date) {
   return day + "/" + month + "/" + year + " " + hour + ":" + min;
 }
 
+/**
+ * Format to date DD/MM/YYYY
+ * @param {string} date
+ */
 function FormatDate(date) {
   var d = new Date(date),
     month = "" + (d.getMonth() + 1),
@@ -37,6 +54,10 @@ function FormatDate(date) {
   return [day, month, year].join("/");
 }
 
+/**
+ * Get the circle size based in cases
+ * @param {object} city
+ */
 function GetCicleSize(city) {
   var raste = city.cases || city.raste_gjithesej;
   return raste < 100 ? raste * 140 : raste > 1000 ? raste * 40 : raste * 60;
@@ -112,6 +133,10 @@ function HtmlTemplate(city) {
   return html;
 }
 
+/**
+ * Card values inside Materialize Modal
+ * @param {object} city
+ */
 function GenerateAlbCards(city) {
   $("#totalCard").append(
     "<p>Sot: " +
@@ -165,6 +190,10 @@ function GenerateAlbCards(city) {
   $("#testedCard").append("<p>Dje: " + city.teste_gjithesej_dje + "</p>");
 }
 
+/**
+ * Card values inside Materialize Modal
+ * @param {object} city
+ */
 function GenerateKsCards(city) {
   $("#totalCardKs").append(
     "<p>Sot: " +
@@ -222,6 +251,13 @@ function GenerateKsCards(city) {
   }
 }
 
+/**
+ * Generate Chart for a specific month
+ * @param {string[]} dates
+ * @param {number[]} tests
+ * @param {number[]} infections
+ * @param {string} month
+ */
 function ShowTestsGraphic(dates, tests, infections, month) {
   var config = {
     type: "line",
@@ -287,6 +323,9 @@ function ShowTestsGraphic(dates, tests, infections, month) {
   window.myLine = new Chart(ctx, config);
 }
 
+/**
+ * API - get json object
+ */
 function GenerateGraphics() {
   var dates = {
     shkurt: [],
@@ -340,15 +379,20 @@ function GenerateGraphics() {
           infections.shkurt,
           "shkurt"
         );
+
         ShowTestsGraphic(dates.mars, tests.mars, infections.mars, "mars");
+
       });
   } else alert("Nevojitet nje browser i ri per te aksesuar kete faqe!");
 }
 
+/**
+ * Init Materialize components
+ */
 function InitMaterialize() {
   var elems = document.querySelectorAll(".fixed-action-btn");
-  var instances = M.FloatingActionButton.init(elems, { hoverEnabled: false });
+  M.FloatingActionButton.init(elems, { hoverEnabled: false });
 
   var elems = document.querySelectorAll(".modal");
-  var instances = M.Modal.init(elems);
+  M.Modal.init(elems);
 }
