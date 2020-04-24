@@ -10,4 +10,3 @@ PWA COVID-19 Tracker using Javascript, jQuery, Leaflet.js Map, Chart.js, CSS, HT
 ![PWA COVID-19 1](https://github.com/eneza/covid-19/blob/master/images/COVID-19%20CoronaVirus%20project%20image%202.png?raw=true)
 
 
-# Thank you! <br/><br/> E.Neza
